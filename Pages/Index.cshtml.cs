@@ -12,9 +12,12 @@ namespace MegaDesk_Razor_ACZ.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string url = "/MegaDesk"
+            + Request.Query["redirect_url"];
 
+            return Redirect(url);
         }
     }
 }

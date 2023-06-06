@@ -1,0 +1,37 @@
+﻿@page
+@model MegaDesk_Razor_ACZ.Pages.MegaDesk.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DeskQuote</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DeskQuote.CustomerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DeskQuote.CustomerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DeskQuote.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DeskQuote.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DeskQuote.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DeskQuote.Date)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.DeskQuote?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

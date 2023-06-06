@@ -1,9 +1,24 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MegaDesk_Razor_ACZ.Data;
+using MegaDesk_Razor_ACZ.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<MegaDesk_Razor_ACZContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MegaDesk_Razor_ACZContext") ?? throw new InvalidOperationException("Connection string 'MegaDesk_Razor_ACZContext' not found.")));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
