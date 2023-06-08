@@ -3,6 +3,7 @@ using System;
 using MegaDesk_Razor_ACZ.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegaDesk_Razor_ACZ.Migrations
 {
     [DbContext(typeof(MegaDesk_Razor_ACZContext))]
-    partial class MegaDesk_Razor_ACZContextModelSnapshot : ModelSnapshot
+    [Migration("20230608001332_addids")]
+    partial class addids
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
