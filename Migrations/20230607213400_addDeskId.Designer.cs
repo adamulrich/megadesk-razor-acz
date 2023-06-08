@@ -3,6 +3,7 @@ using System;
 using MegaDesk_Razor_ACZ.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegaDesk_Razor_ACZ.Migrations
 {
     [DbContext(typeof(MegaDesk_Razor_ACZContext))]
-    partial class MegaDesk_Razor_ACZContextModelSnapshot : ModelSnapshot
+    [Migration("20230607213400_addDeskId")]
+    partial class addDeskId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -60,7 +63,7 @@ namespace MegaDesk_Razor_ACZ.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("ProductionSpeedCostId")
+                    b.Property<int?>("ProductionSpeedCostId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -78,7 +81,8 @@ namespace MegaDesk_Razor_ACZ.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BasePrice")
+                    b.Property<int?>("BasePrice")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -100,13 +104,13 @@ namespace MegaDesk_Razor_ACZ.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("TierAPrice")
+                    b.Property<double?>("TierAPrice")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("TierBPrice")
+                    b.Property<double?>("TierBPrice")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("TierCPrice")
+                    b.Property<double?>("TierCPrice")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
@@ -116,13 +120,13 @@ namespace MegaDesk_Razor_ACZ.Migrations
 
             modelBuilder.Entity("MegaDesk_Razor_ACZ.Models.Desk", b =>
                 {
-                    b.HasOne("MegaDesk_Razor_ACZ.Models.Material", "Material")
+                    b.HasOne("MegaDesk_Razor_ACZ.Models.Material", "material")
                         .WithMany()
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Material");
+                    b.Navigation("material");
                 });
 
             modelBuilder.Entity("MegaDesk_Razor_ACZ.Models.DeskQuote", b =>
@@ -133,9 +137,7 @@ namespace MegaDesk_Razor_ACZ.Migrations
 
                     b.HasOne("MegaDesk_Razor_ACZ.Models.ProductionSpeedCost", "ProductionSpeedCost")
                         .WithMany()
-                        .HasForeignKey("ProductionSpeedCostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductionSpeedCostId");
 
                     b.Navigation("Desk");
 
