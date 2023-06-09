@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.minmax {
+    min-width: 16rem;
+    max-width: 20rem;
+    margin-right: 10px;
+}

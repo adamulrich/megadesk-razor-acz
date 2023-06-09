@@ -67,9 +67,25 @@ namespace MegaDesk_Razor_ACZ.Models
         public double Price { get; set; }
         
         public int? DeskId { get; set; }
-        public Desk? Desk { get; set; }
+        public Desk Desk { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
+
+        public string DateforDisplay
+        {
+            get
+            {
+                return this.Date.ToString("dd MMM yy");
+            }
+        }
+
+        public string PriceforDisplay
+        {
+            get
+            {
+                return this.Price.ToString("C");
+            }
+        }
 
         // constants
         int BASE_COST = 200;

@@ -2,47 +2,52 @@
 @model MegaDesk_Razor_ACZ.Pages.MegaDesk.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Mega Desk Quotes";
 }
 
-<h1>Index</h1>
+<h1>Mega Desk Quotes</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].CustomerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].Date)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.DeskQuote) {
-        <tr>    
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<form>
+
+    <label for="materialSelect" id='materialLabel' class="form-label fw-bold mt-2 mb-2">Material:</label>
+    <select id='materialSelect' class="form-select minmax" asp-for="MaterialName" asp-items="Model.MaterialList" aria-labelledby="materialLabel">
+        <option value="">All</option>
+    </select>
+
+  <label for='searchString' id="searchLabel" class="fw-bold form-label ms-2 mt-2">Search Text:</label>
+    <input id='searchString' class="minmax form-control" type="text" asp-for="SearchString" placeholder="Type your search here" aria-labelledby='searchLabel' />
+
+    <label for="sortSelect" id='sortLabel' class="ms-2 mt-2 fw-bold">Sort:</label>
+    <select id="sortSelect" class="form-select ms-2 minmax" asp-for="SortType" asp-items="Model.SortTypeList" aria-labelledby="sortLabel">
+    </select>
+
+    <input type="submit" class="btn btn-primary mt-2 mb-2" value="Filter/Sort" />
+</form>
+
+<div class="card-group">
+    @foreach (var item in Model.DeskQuote) {
+        <div class="card  mb-3 minmax">
+            <div class="card-header"><strong>Customer: </strong>@Html.DisplayFor(modelItem => item.CustomerName)</div>
+            <div class="card-body">
+                <p class="card-title"><strong>Order Date: </strong>@Html.DisplayFor(modelItem => item.DateforDisplay)</p>
+                <p class="card-text">
+                    <strong>Spec: </strong>
+                    @Html.DisplayFor(modelItem =>  item.Desk.Material.Name) @Html.DisplayFor(modelItem =>  item.Desk.Depth)" x
+                    @Html.DisplayFor(modelItem =>  item.Desk.Width)" @Html.DisplayFor(modelItem =>  item.Desk.DrawerCount) 
+                    Drawer(s)
+                </p>
+                <p class="card-text"><strong>Production time: </strong>@Html.DisplayFor(modelItem =>  item.ProductionSpeedCost.Description)</p>
+                <p class="card-text"><strong>Price:</strong>  @Html.DisplayFor(modelItem =>  item.PriceforDisplay)</p>
+            </div>
+            <div class='card-footer bg-transparent border-success'>
+                <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                <a class='btn btn-primary' asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                <a class='btn btn-danger' asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>

@@ -12,7 +12,9 @@ namespace MegaDesk_Razor_ACZ.Migrations
 {
     [DbContext(typeof(MegaDesk_Razor_ACZContext))]
     [Migration("20230608001332_addids")]
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     partial class addids
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
