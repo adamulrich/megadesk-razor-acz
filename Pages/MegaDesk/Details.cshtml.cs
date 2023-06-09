@@ -28,7 +28,11 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
                 return NotFound();
             }
 
-            var deskquote = await _context.DeskQuote.FirstOrDefaultAsync(m => m.Id == id);
+            var deskquote = await _context.DeskQuote
+                .Include(q => q.ProductionSpeedCost)
+                .Include(q => q.Desk)
+                .Include(q => q.Desk.Material)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (deskquote == null)
             {
                 return NotFound();

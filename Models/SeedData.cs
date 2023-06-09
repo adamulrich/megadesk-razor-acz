@@ -49,9 +49,9 @@ namespace MegaDesk_Razor_ACZ.Models
                     var Materials = (from m in context.Material select m).ToList();
                     int count = Materials.Count();
 
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 25; i++)
                     {
-                        int index = rnd.Next(0, count - 1);
+                        int index = rnd.Next(count);
                         context.Desk.Add(
                             new Desk
                             {
@@ -73,7 +73,6 @@ namespace MegaDesk_Razor_ACZ.Models
                     var ProdSpeeds = (from m in context.ProductionSpeedCost select m).ToList();
                     
                     int ProdSpeedCount = ProdSpeeds.Count();
-                    int speedIndex = rnd.Next(ProdSpeedCount);
 
                     var Desks = (from d in context.Desk select d).ToList();
 
@@ -81,6 +80,8 @@ namespace MegaDesk_Razor_ACZ.Models
                     {
                         DeskQuote deskQuote = new DeskQuote();
                         deskQuote.CustomerName = getRandomName();
+                        int speedIndex = rnd.Next(ProdSpeedCount);
+
                         deskQuote.ProductionSpeedCostId = ProdSpeeds.ElementAt(speedIndex).Id;
                         deskQuote.ProductionSpeedCost = ProdSpeeds.ElementAt(speedIndex);
                         deskQuote.Date = DateTime.Now;

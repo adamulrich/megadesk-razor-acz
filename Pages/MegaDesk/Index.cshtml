@@ -18,11 +18,11 @@
         <option value="">All</option>
     </select>
 
-  <label for='searchString' id="searchLabel" class="fw-bold form-label ms-2 mt-2">Search Text:</label>
+  <label for='searchString' id="searchLabel" class="fw-bold form-label mb-2 mt-2">Customer Search:</label>
     <input id='searchString' class="minmax form-control" type="text" asp-for="SearchString" placeholder="Type your search here" aria-labelledby='searchLabel' />
 
-    <label for="sortSelect" id='sortLabel' class="ms-2 mt-2 fw-bold">Sort:</label>
-    <select id="sortSelect" class="form-select ms-2 minmax" asp-for="SortType" asp-items="Model.SortTypeList" aria-labelledby="sortLabel">
+    <label for="sortSelect" id='sortLabel' class="mt-2 mb-2 fw-bold">Sort:</label>
+    <select id="sortSelect" class="form-select minmax" asp-for="SortType" asp-items="Model.SortTypeList" aria-labelledby="sortLabel">
     </select>
 
     <input type="submit" class="btn btn-primary mt-2 mb-2" value="Filter/Sort" />

@@ -74,7 +74,7 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
 
             if (!string.IsNullOrEmpty(SearchString))
             {
-                deskQuotes = deskQuotes.Where(dq => dq.CustomerName.Contains(SearchString));
+                deskQuotes = deskQuotes.Where(dq => dq.CustomerName.ToLower().Contains(SearchString.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(MaterialName))
