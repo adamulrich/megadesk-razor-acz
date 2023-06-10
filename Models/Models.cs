@@ -9,15 +9,15 @@ namespace MegaDesk_Razor_ACZ.Models
     public class Desk
     {
         public int Id { get; set; }
-
+        [Range(24, 96)]
         [Required]
         [Display(Name = "Width")]
         public int Width { get; set; }
-
+        [Range(12, 48)]
         [Required]
         [Display(Name = "Depth")]
         public int Depth { get; set; }
-
+        [Range(0, 7)]
         [Required]
         [Display(Name = "Drawer Count")]
         public int DrawerCount { get; set; }
@@ -58,7 +58,7 @@ namespace MegaDesk_Razor_ACZ.Models
     public class DeskQuote
     {
         public int Id { get; set; }
-
+        [RegularExpression(@"^[a-zA-Z_]+$")]
         public string? CustomerName { get; set; }
 
         public int ProductionSpeedCostId { get; set; }
