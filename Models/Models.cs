@@ -58,7 +58,8 @@ namespace MegaDesk_Razor_ACZ.Models
     public class DeskQuote
     {
         public int Id { get; set; }
-        [RegularExpression(@"^[a-zA-Z_]+$")]
+        [Required]
+        [Display(Name = "Customer Name")]
         public string? CustomerName { get; set; }
 
         public int ProductionSpeedCostId { get; set; }
@@ -130,6 +131,8 @@ namespace MegaDesk_Razor_ACZ.Models
             // set price
             this.Price = deskPrice;
         }
+
+
 
 
         }

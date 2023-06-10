@@ -23,18 +23,39 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
         [BindProperty]
         public DeskQuote DeskQuote { get; set; } = default!;
 
+        public SelectList MaterialList { get; set; } = default!;
+        public SelectList RushOrderList { get; set; } = default!;
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            IQueryable<string> materialQuery = from m in _context.Material
+                                               orderby m.Id
+                                               select m.Name;
+
+            MaterialList = new SelectList(materialQuery.ToList());
+
+            IQueryable<string> rushOrderQuery = from m in _context.ProductionSpeedCost
+                                                orderby m.Id
+                                                select m.Description;
+
+            RushOrderList = new SelectList(rushOrderQuery.ToList());
+
             if (id == null || _context.DeskQuote == null)
             {
                 return NotFound();
             }
 
-            var deskquote =  await _context.DeskQuote.FirstOrDefaultAsync(m => m.Id == id);
+            var deskquote = await _context.DeskQuote
+                .Include(q => q.ProductionSpeedCost)
+                .Include(q => q.Desk)
+                .Include(q => q.Desk.Material)
+                .FirstOrDefaultAsync(q => q.Id == id);
+
             if (deskquote == null)
             {
                 return NotFound();
             }
+
             DeskQuote = deskquote;
             return Page();
         }
@@ -48,8 +69,27 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
                 return Page();
             }
 
-            _context.Attach(DeskQuote).State = EntityState.Modified;
+            var deskquote = await _context.DeskQuote
+                .Include(q => q.ProductionSpeedCost)
+                .Include(q => q.Desk)
+                .Include(q => q.Desk.Material)
+                .FirstOrDefaultAsync(q => q.Id == DeskQuote.Id);
+            if (deskquote == null)
+            {
+                return NotFound();
+            }
 
+            var mat = await _context.Material.FirstOrDefaultAsync(q => q.Name == DeskQuote.Desk.Material.Name);
+            var speed = await _context.ProductionSpeedCost.FirstOrDefaultAsync(q => q.Description == DeskQuote.ProductionSpeedCost.Description);
+
+
+            deskquote.CustomerName = DeskQuote.CustomerName;
+            deskquote.Desk.Width = DeskQuote.Desk.Width;
+            deskquote.Desk.Depth = DeskQuote.Desk.Depth;
+            deskquote.Desk.DrawerCount = DeskQuote.Desk.DrawerCount;
+            deskquote.Desk.Material = mat;
+            deskquote.ProductionSpeedCost = speed;
+            deskquote.calculatePrice();
             try
             {
                 await _context.SaveChangesAsync();
@@ -71,7 +111,7 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
 
         private bool DeskQuoteExists(int id)
         {
-          return (_context.DeskQuote?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.DeskQuote.Any(e => e.Id == id);
         }
     }
 }

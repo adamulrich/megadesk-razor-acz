@@ -28,22 +28,22 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
 
             MaterialList = new SelectList(materialQuery.ToList());
 
+            IQueryable<string> rushOrderQuery = from m in _context.ProductionSpeedCost
+                                                orderby m.Id
+                                               select m.Description;
 
-
-
+            RushOrderList = new SelectList(rushOrderQuery.ToList());
 
             return Page();
         }
 
         [BindProperty]
         public DeskQuote DeskQuote { get; set; } = default!;
-        
         public Desk Desk { get; set; } = default!;
-
         public IEnumerable<Material> Material { get; set; } = default!;
         public SelectList MaterialList { get; set; } = default!;
         public IEnumerable<ProductionSpeedCost> ProductionSpeedCost { get; set; } = default!;
-
+        public SelectList RushOrderList { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -53,8 +53,15 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
                 return Page();
             }
 
+            
 
-            DeskQuote.Desk = Desk;
+            var mat = await _context.Material.FirstOrDefaultAsync(q => q.Name == DeskQuote.Desk.Material.Name);
+            var speed = await _context.ProductionSpeedCost.FirstOrDefaultAsync(q => q.Description == DeskQuote.ProductionSpeedCost.Description);
+
+
+            DeskQuote.Desk.Material = mat;
+            DeskQuote.ProductionSpeedCost = speed;
+
             DeskQuote.calculatePrice();
             DeskQuote.Date = DateTime.Now;
 
