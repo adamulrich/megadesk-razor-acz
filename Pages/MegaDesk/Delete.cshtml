@@ -11,30 +11,65 @@
 <div>
     <h4>DeskQuote</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DeskQuote.CustomerName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DeskQuote.CustomerName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DeskQuote.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DeskQuote.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DeskQuote.Date)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DeskQuote.Date)
-        </dd>
-    </dl>
+
+    <div class="card mb-3 minmax">
+        <div class="card-header"><strong>Customer: </strong>@Html.DisplayFor(model => model.DeskQuote.CustomerName)</div>
+         <div class="card-body">
+            <table class="table table.default">
+                <tbody>
+                    <tr>
+                        <th scope="row">Order Date</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.DateforDisplay)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Material</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.Desk.Material.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Width</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.Desk.Width)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Depth</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.Desk.Depth)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Drawer Count</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.Desk.DrawerCount)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Production Time</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.ProductionSpeedCost.Description)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price</th>
+                        <td>
+                            @Html.DisplayFor(model => model.DeskQuote.PriceforDisplay)
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
     
     <form method="post">
         <input type="hidden" asp-for="DeskQuote.Id" />
+        <a asp-page="./Index" class="btn btn-primary">Back to List</a>
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-page="./Index" class="btn btn-success">Back to List</a>
     </form>
 </div>
