@@ -7,9 +7,6 @@
 
 <h1>Mega Desk Quotes</h1>
 
-<p>
-    <a asp-page="Create" class="btn btn-primary">Create New</a>
-</p>
 
 <form>
 
@@ -25,8 +22,12 @@
     <select id="sortSelect" class="form-select minmax" asp-for="SortType" asp-items="Model.SortTypeList" aria-labelledby="sortLabel">
     </select>
 
-    <input type="submit" class="btn btn-primary mt-2 mb-2" value="Filter/Sort" />
+    <input type="submit" class="btn btn-primary mt-3 mb-5" value="Filter/Sort" />
 </form>
+
+<p class="d-flex justify-content-center">
+    <a asp-page="Create" class="btn btn-success d-flex justify-content-center w-25">Create New</a>
+</p>
 
 <div class="card-group">
     @foreach (var item in Model.DeskQuote) {
@@ -43,10 +44,10 @@
                 <p class="card-text"><strong>Production time: </strong>@Html.DisplayFor(modelItem =>  item.ProductionSpeedCost.Description)</p>
                 <p class="card-text"><strong>Price:</strong>  @Html.DisplayFor(modelItem =>  item.PriceforDisplay)</p>
             </div>
-            <div class='card-footer bg-transparent border-success'>
-                <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
-                <a class='btn btn-primary' asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                <a class='btn btn-danger' asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            <div class='card-footer bg-transparent border-success d-flex bd-highlight'>
+                <a class='btn btn-primary bd-highlight' asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-warning ms-2 bd-highlight" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                <a class='btn btn-danger ms-auto bd-highlight' asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </div>
         </div>
     }
