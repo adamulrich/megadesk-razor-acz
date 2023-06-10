@@ -88,7 +88,7 @@ namespace MegaDesk_Razor_ACZ.Pages.MegaDesk
             }
             if (SortType == "2")
             {
-                deskQuotes = deskQuotes.OrderBy(dq => dq.CustomerName);
+                deskQuotes = deskQuotes.OrderBy(dq => dq.CustomerName.ToLower());
             }
             else
             {

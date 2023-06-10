@@ -19,6 +19,9 @@ namespace MegaDesk_Razor_ACZ.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MegaDesk_Razor_ACZContext>>()))
             {
+
+                
+
                 // Look for any materials
                 if (!context.Material.Any())
                 {
@@ -29,7 +32,9 @@ namespace MegaDesk_Razor_ACZ.Models
                         new Material { Name = "Laminate", BasePrice = 100 },
                         new Material { Name = "Pine", BasePrice = 50 }
                     );
+                    context.SaveChanges();
                 }
+                
 
                 // Look for any production speed cost data
                 if (!context.ProductionSpeedCost.Any())

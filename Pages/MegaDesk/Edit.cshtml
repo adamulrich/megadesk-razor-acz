@@ -12,22 +12,40 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DeskQuote.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="DeskQuote.CustomerName" class="control-label"></label>
                 <input asp-for="DeskQuote.CustomerName" class="form-control" />
                 <span asp-validation-for="DeskQuote.CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeskQuote.Price" class="control-label"></label>
-                <input asp-for="DeskQuote.Price" class="form-control" />
-                <span asp-validation-for="DeskQuote.Price" class="text-danger"></span>
+                <label asp-for="DeskQuote.Desk.Width" class="control-label">Width (min 24, max 92)</label>
+                <input asp-for="DeskQuote.Desk.Width" class="form-control" />
+                <span asp-validation-for="DeskQuote.Desk.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeskQuote.Date" class="control-label"></label>
-                <input asp-for="DeskQuote.Date" class="form-control" />
-                <span asp-validation-for="DeskQuote.Date" class="text-danger"></span>
+                <label asp-for="DeskQuote.Desk.Depth" class="control-label">Depth (min 12, max 48)</label>
+                <input asp-for="DeskQuote.Desk.Depth" class="form-control" />
+                <span asp-validation-for="DeskQuote.Desk.Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeskQuote.Desk.DrawerCount" class="control-label">Number of Drawers (min 0, max 7)</label>
+                <input asp-for="DeskQuote.Desk.DrawerCount" class="form-control" />
+                <span asp-validation-for="DeskQuote.Desk.DrawerCount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="materialSelect" id="materialLabel" class="form-label fw-bold mt-2 mb-2">Material:</label>
+                <select id="materialSelect" class="form-select minmax" asp-for="DeskQuote.Desk.Material.Name" asp-items="Model.MaterialList" aria-labelledby="materialLabel" required>
+                    <option value="" disabled selected>Select an option</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rushOrderSelect" id="rushOrderLabel" class="form-label fw-bold mt-2 mb-2">Production Time:</label>
+                <select id="rushOrderSelect" class="form-select minmax" asp-for="DeskQuote.ProductionSpeedCost.Description" asp-items="Model.RushOrderList" aria-labelledby="rushOrderLabel" required>
+                    <option value="" disabled selected>Select an option</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -41,5 +59,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

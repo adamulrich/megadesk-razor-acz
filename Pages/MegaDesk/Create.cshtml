@@ -19,24 +19,30 @@
                 <span asp-validation-for="DeskQuote.CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Desk.Width" class="control-label">Width (min 12, max 92)</label>
-                <input asp-for="Desk.Width" class="form-control" />
-                <span asp-validation-for="Desk.Width" class="text-danger"></span>
+                <label asp-for="DeskQuote.Desk.Width" class="control-label">Width (min 24, max 92)</label>
+                <input asp-for="DeskQuote.Desk.Width" class="form-control" />
+                <span asp-validation-for="DeskQuote.Desk.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Desk.Depth" class="control-label">Depth</label>
-                <input asp-for="Desk.Depth" class="form-control" />
-                <span asp-validation-for="Desk.Depth" class="text-danger"></span>
+                <label asp-for="DeskQuote.Desk.Depth" class="control-label">Depth (min 12, max 48)</label>
+                <input asp-for="DeskQuote.Desk.Depth" class="form-control" />
+                <span asp-validation-for="DeskQuote.Desk.Depth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Desk.DrawerCount" class="control-label">Number of Drawers</label>
-                <input asp-for="Desk.DrawerCount" class="form-control" />
-                <span asp-validation-for="Desk.DrawerCount" class="text-danger"></span>
+                <label asp-for="DeskQuote.Desk.DrawerCount" class="control-label">Number of Drawers (min 0, max 7)</label>
+                <input asp-for="DeskQuote.Desk.DrawerCount" class="form-control" />
+                <span asp-validation-for="DeskQuote.Desk.DrawerCount" class="text-danger"></span>
             </div>
             
             <div class="form-group">
                 <label for="materialSelect" id="materialLabel" class="form-label fw-bold mt-2 mb-2">Material:</label>
-                <select id="materialSelect" class="form-select minmax" asp-for="MaterialList" asp-items="Model.MaterialList" aria-labelledby="materialLabel">
+                <select id="materialSelect" class="form-select minmax" asp-for="DeskQuote.Desk.Material.Name" asp-items="Model.MaterialList" aria-labelledby="materialLabel" required>
+                    <option value="" disabled selected>Select an option</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rushOrderSelect" id="rushOrderLabel" class="form-label fw-bold mt-2 mb-2">Production Time:</label>
+                <select id="rushOrderSelect" class="form-select minmax" asp-for="DeskQuote.ProductionSpeedCost.Description" asp-items="Model.RushOrderList" aria-labelledby="rushOrderLabel" required>
                     <option value="" disabled selected>Select an option</option>
                 </select>
             </div>
