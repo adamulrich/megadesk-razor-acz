@@ -37,9 +37,10 @@
 
             <div class="form-group">
                 <label for="materialSelect" id="materialLabel" class="form-label fw-bold mt-2 mb-2">Material:</label>
-                <select id="materialSelect" class="form-select minmax" asp-for="DeskQuote.Desk.Material.Name" asp-items="Model.MaterialList" aria-labelledby="materialLabel" required>
+                <select id="materialSelect" class="form-select minmax" asp-for="DeskQuote.Desk.Material.Name" asp-items="Model.MaterialList" aria-labelledby="materialLabel" required onchange="updateMaterialImage()">
                     <option value="" disabled selected>Select an option</option>
                 </select>
+                <img id="materialImage" class="img-responsive mt-2" src="" alt="Material Image" />
             </div>
             <div class="form-group">
                 <label for="rushOrderSelect" id="rushOrderLabel" class="form-label fw-bold mt-2 mb-2">Production Time:</label>
@@ -57,6 +58,32 @@
 <div>
     <a asp-page="./Index" class="btn btn-primary mt-2">Back to List</a>
 </div>
+
+<script defer>
+
+    window.onload = function () {
+        // Call the updateMaterialImage() function on page load
+        updateMaterialImage();
+    };
+
+
+    function updateMaterialImage() {
+        // Get the selected material value
+        var selectedMaterial = $("#materialSelect").val();
+
+
+        // Update the image source based on the selected material
+        if (!selectedMaterial == "") {
+            $("#materialImage").attr("src", `/images/${selectedMaterial}.jpg`);
+            $("#materialImage").show(); // Clear the image source if no material is selected
+        } else {
+            $("#materialImage").attr("src", ``);
+            $("#materialImage").hide(); // Clear the image source if no material is selected
+
+        }
+    }
+</script>
+
 
 @section Scripts {
     @{

@@ -39,7 +39,7 @@
                 <select id="materialSelect" class="form-select minmax" asp-for="DeskQuote.Desk.Material.Name" asp-items="Model.MaterialList" aria-labelledby="materialLabel" required onchange="updateMaterialImage()">
                     <option value="" disabled selected>Select an option</option>
                 </select>
-                <img id="materialImage" src="" alt="Material Image" />
+                <img id="materialImage" class="img-responsive mt-2"  src="" alt="Material Image" />
             </div>
             <div class="form-group">
                 <label for="rushOrderSelect" id="rushOrderLabel" class="form-label fw-bold mt-2 mb-2">Production Time:</label>
@@ -60,30 +60,28 @@
 </div>
 <!-- Place this code within a <script> tag, preferably at the bottom of the page -->
 
-<script>
+<script defer>
+
+    window.onload = function() {
+        // Call the updateMaterialImage() function on page load
+        updateMaterialImage();
+    };
+  
+
     function updateMaterialImage() {
         // Get the selected material value
         var selectedMaterial = $("#materialSelect").val();
 
 
         // Update the image source based on the selected material
-        switch (selectedMaterial) {
-            case "Rosewood":
-                $("#materialImage").attr("src", "/images/rosewood.jpg");
-                break;
-            case "Oak":
-                $("#materialImage").attr("src", "/images/oak.jpg");
-                break;
-            case "Veneer":
-                $("#materialImage").attr("src", "/images/veneer.jpg");
-                break;
-            case "Pine":
-                $("#materialImage").attr("src", "/images/pine.jpg");
-                break;
-            // Add cases for other materials and their corresponding image paths
-            default:
-                $("#materialImage").attr("src", ""); // Clear the image source if no material is selected
-                break;
+        if (!selectedMaterial == "") {
+            $("#materialImage").attr("src", `/images/${selectedMaterial}.jpg`);
+            $("#materialImage").show(); // Clear the image source if no material is selected
+        } else
+        {
+            $("#materialImage").attr("src", ``);
+            $("#materialImage").hide(); // Clear the image source if no material is selected
+
         }
     }
 </script>
@@ -91,3 +89,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
