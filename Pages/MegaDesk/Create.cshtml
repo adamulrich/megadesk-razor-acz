@@ -14,22 +14,22 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DeskQuote.CustomerName" class="control-label"></label>
+                <label asp-for="DeskQuote.CustomerName" class="control-label fw-bold"></label>
                 <input asp-for="DeskQuote.CustomerName" class="form-control" />
                 <span asp-validation-for="DeskQuote.CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeskQuote.Desk.Width" class="control-label">Width (min 24, max 92)</label>
+                <label asp-for="DeskQuote.Desk.Width" class="control-label fw-bold">Width (min 24, max 92)</label>
                 <input asp-for="DeskQuote.Desk.Width" class="form-control" />
                 <span asp-validation-for="DeskQuote.Desk.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeskQuote.Desk.Depth" class="control-label">Depth (min 12, max 48)</label>
+                <label asp-for="DeskQuote.Desk.Depth" class="control-label fw-bold">Depth (min 12, max 48)</label>
                 <input asp-for="DeskQuote.Desk.Depth" class="form-control" />
                 <span asp-validation-for="DeskQuote.Desk.Depth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeskQuote.Desk.DrawerCount" class="control-label">Number of Drawers (min 0, max 7)</label>
+                <label asp-for="DeskQuote.Desk.DrawerCount" class="control-label fw-bold">Number of Drawers (min 0, max 7)</label>
                 <input asp-for="DeskQuote.Desk.DrawerCount" class="form-control" />
                 <span asp-validation-for="DeskQuote.Desk.DrawerCount" class="text-danger"></span>
             </div>
@@ -47,7 +47,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary mt-2 mb-2" />
             </div>
         </form>
 
@@ -55,7 +55,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index" class="btn btn-success">Back to List</a>
 </div>
 
 @section Scripts {
